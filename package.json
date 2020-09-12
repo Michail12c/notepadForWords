@@ -1,0 +1,24 @@
+{
+  "name": "notepadforwords",
+  "version": "1.0.0",
+  "description": "A platform for recording and repeating foreign words",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Michail12c/notepadForWords.git"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "node"
+  ],
+  "author": "Mykhailo Tsoma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Michail12c/notepadForWords/issues"
+  },
+  "homepage": "https://github.com/Michail12c/notepadForWords#readme"
+}
