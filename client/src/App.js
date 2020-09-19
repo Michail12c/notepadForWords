@@ -1,11 +1,12 @@
 import React from 'react';
 import './App.css';
+import HeaderComponent from './components/shared/AppBar';
 
 const App = () => {
   return (
-    <div className="App">
-     <h1>Notepad for words</h1>
-   </div>
+   <>
+    <HeaderComponent/>
+   </>
   );
 }
 
