@@ -13,6 +13,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Navbar from './Navbar';
+import FormModal from './FormModal';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -105,8 +106,14 @@ const HeaderComponent = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <FormModal
+          title={'register'}/>
+       </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <FormModal
+          title={'login'}/>
+      </MenuItem>
     </Menu>
   );
 
