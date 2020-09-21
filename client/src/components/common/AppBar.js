@@ -14,6 +14,9 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Navbar from './Navbar';
 import FormModal from './FormModal';
+import auth from '../../utils/auth';
+import { withRouter } from 'react-router-dom';
+
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -70,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HeaderComponent = () => {
+const HeaderComponent = (props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -113,6 +116,20 @@ const HeaderComponent = () => {
       <MenuItem onClick={handleMenuClose}>
         <FormModal
           title={'login'}/>
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <div onClick={() => {
+          auth.logout(() => {
+            props.history.push('/')
+          })
+        }}>logout</div>
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <div onClick={() => {
+          auth.login(() => {
+            props.history.push('/lesson')
+          })
+        }}>enter</div>
       </MenuItem>
     </Menu>
   );
@@ -209,4 +226,4 @@ const HeaderComponent = () => {
   );
 }
 
-export default HeaderComponent;
+export default withRouter(HeaderComponent);
