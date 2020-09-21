@@ -3,8 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const path = require('path');
-const authRouter = require('./server/routes/auth');
-const lessonRouter = require('./server/routes/lesson');
+const routes = require('./server/routes')
 
 require('dotenv').config();
 
@@ -13,8 +12,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json({extended: true}))
 app.use(helmet());
 
-app.use('/auth', authRouter);
-app.use('/lesson', lessonRouter);
+routes(app);
 
 app.use('/', express.static(path.join(__dirname, 'client', 'build')));
 

@@ -18,16 +18,15 @@ const schema = new Schema({
    required: true,
    default: Date.now()
   },
- lists: {
-   items: [
+ lists:  [
     {
-        listsId: {
+        list: {
         type: ObjectId,
         ref: 'Lesson',
+        title: String
       }
     }
    ]
- }
 });
 
 module.exports = mongoose.model('User', schema, 'user');

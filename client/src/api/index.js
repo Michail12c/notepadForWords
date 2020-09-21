@@ -12,11 +12,15 @@ const api = axios.create(config);
 
 export const userApi = {
 
-  auth(data) {
-    return api.post('auth/', data);
+  login(data) {
+    return api.post('api/auth/login', data);
   },
 
   register(data) {
-   return api.post('auth/register/', data);
+   return api.post('api/auth/register/', data);
+  },
+
+  getProperty(data) {
+    return api.post('api/user/list', data);
   }
 };

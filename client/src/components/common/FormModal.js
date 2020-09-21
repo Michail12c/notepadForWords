@@ -47,7 +47,9 @@ const FormModal = ({
   const sendValue = () => {
     console.log(inputValue);
     //test kind, later i will use saga
-    userApi.register(inputValue);
+    title === 'register'
+       ?  userApi.register(inputValue)
+       : userApi.login(inputValue);
     handleClose();
   }
 
