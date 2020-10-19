@@ -3,18 +3,29 @@ const app = express();
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const path = require('path');
-const routes = require('./server/routes')
+const routes = require('./server/routes');
+const passport = require('passport');
+const cors = require('cors');
 
 require('dotenv').config();
 
 const PORT = process.env.PORT || 3001;
+
+
 app.use(express.urlencoded({extended:true}));
 app.use(express.json({extended: true}))
 app.use(helmet());
 
+
+app.use(cors());
+app.use(passport.initialize());
+require('./server/services/passport')(passport);
+
 routes(app);
 
 app.use('/', express.static(path.join(__dirname, 'client', 'build')));
+
+
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));

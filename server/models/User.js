@@ -18,6 +18,7 @@ const schema = new Schema({
    required: true,
    default: Date.now()
   },
+  googleId: String,
  lists:  [
     {
         list: {

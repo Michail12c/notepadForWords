@@ -16,6 +16,9 @@ import Navbar from './Navbar';
 import FormModal from './FormModal';
 import auth from '../../utils/auth';
 import { withRouter } from 'react-router-dom';
+import { setAuth } from '../../redux/actions/user';
+import { useDispatch, useSelector } from 'react-redux';
+import { SET_IS_AUTH } from '../../redux/constants';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -75,11 +78,17 @@ const useStyles = makeStyles((theme) => ({
 
 const HeaderComponent = (props) => {
   const classes = useStyles();
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
+  const isAuth = useSelector(state => state.userReducer.isAuth);
+  const dispatch = useDispatch();
+
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -98,6 +107,12 @@ const HeaderComponent = (props) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleLogout = () => {
+    auth.logout(props.history);
+    dispatch({type: SET_IS_AUTH, isAuthUser: false});
+
+  }
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -109,28 +124,20 @@ const HeaderComponent = (props) => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
+    {!isAuth &&
+       <MenuItem onClick={handleMenuClose}>
+        <FormModal title={'register'}/>
+        </MenuItem>}
+    {!isAuth &&
       <MenuItem onClick={handleMenuClose}>
-        <FormModal
-          title={'register'}/>
-       </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
-        <FormModal
-          title={'login'}/>
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
-        <div onClick={() => {
-          auth.logout(() => {
-            props.history.push('/')
-          })
-        }}>logout</div>
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
-        <div onClick={() => {
-          auth.login(() => {
-            props.history.push('/lesson')
-          })
-        }}>enter</div>
-      </MenuItem>
+        <FormModal title={'login'}/>
+      </MenuItem>}
+   {isAuth &&
+     <MenuItem onClick={handleMenuClose}>
+        <div onClick={handleLogout}>
+          logout
+        </div>
+      </MenuItem>}
     </Menu>
   );
 
@@ -186,7 +193,9 @@ const HeaderComponent = (props) => {
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
+
+       { isAuth && <>
+          <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
               </Badge>
@@ -195,7 +204,8 @@ const HeaderComponent = (props) => {
               <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </IconButton> </>}
+
             <IconButton
               edge="end"
               aria-label="account of current user"

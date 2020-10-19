@@ -2,6 +2,8 @@ const { check, body } = require('express-validator');
 const handleErrors = require('../../middlewares/handleErrors');
 const User = require('../../models/User');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 module.exports = (router) => {
 
@@ -21,7 +23,13 @@ module.exports = (router) => {
     const hashedPassword = await bcrypt.hash(password, 12);
     const newUser = await new User({email, password: hashedPassword}).save();
 
-    res.status(201).json({message: 'User is created'});
+    const token = jwt.sign(
+      {userId: newUser._id},
+      process.env.JWT_SECRET,
+      {expiresIn: '1h'}
+    );
+
+    res.status(201).json({userId: newUser._id, token,  message: 'User is created'});
 
     } catch (error) {
      res.status(500).json(error)

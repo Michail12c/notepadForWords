@@ -30,7 +30,7 @@ module.exports = (router) => {
         {expiresIn: '1h'}
       );
 
-      res.status(200).json(token);
+      res.status(200).json({userId: user._id, token});
 
     } catch (error) {
       res.status(500).json(error);

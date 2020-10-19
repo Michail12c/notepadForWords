@@ -4,7 +4,8 @@ const config = {
   withCredentials:true,
   headers: {
     'Content-Type': 'application/json',
-    'Accept':  'application/json'
+    'Accept':  'application/json',
+    'API-Key': 'secret'
   }
 };
 
@@ -13,11 +14,19 @@ const api = axios.create(config);
 export const userApi = {
 
   login(data) {
-    return api.post('api/auth/login', data);
+    return api.post('api/auth/login', data)
+      .then(res => res.data)
   },
 
   register(data) {
-   return api.post('api/auth/register/', data);
+   return api.post('api/auth/register/', data)
+    .then(res => res.data)
+  },
+
+  googleRegister() {
+    console.log('hello2')
+    return api.get('api/auth/google')
+     .then(res => res.data)
   },
 
   getProperty(data) {
