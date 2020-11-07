@@ -1,0 +1,43 @@
+@import './styles/mixins.scss';
+@import './styles/variables.scss';
+@import './styles/components/home.scss';
+
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  height:100vh;
+}
+
+.app-content {
+  flex-grow: 1;
+}
+
+.footer {
+  width: 100%;
+  background-color: $bg-blue;
+  color: white;
+  text-align: center;
+}
+.inner-footer {
+  display: flex;
+  justify-content: space-around;
+  color: white;
+}
+
+.info-footer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+}
+.info-inner {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  border-top: 2px solid white;
+  margin-bottom: 20px;
+}
+.info-inner div {
+  margin-top: 10px;
+}

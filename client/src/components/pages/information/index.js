@@ -1,4 +1,5 @@
 import React from 'react';
+import FreeLesson from './FreeLesson';
 
 const Information = () => {
   return (
@@ -6,6 +7,7 @@ const Information = () => {
       <h3>
         Information for user
       </h3>
+     <FreeLesson/>
     </div>
   )
 }

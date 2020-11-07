@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
-import './App.css';
+import './App.scss';
 import { Route } from 'react-router-dom';
 import HeaderComponent from './components/common/AppBar';
-import Information from './components/information';
-import Lesson from './components/lesson/Lesson';
+import Information from './components/pages/information';
 import ProtectedRoute from './components/shared/ProtectedRoute';
 import auth from './utils/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_IS_AUTH } from './redux/constants';
+import { pages } from './constants/pages';
+import Footer from './components/common/Footer';
 
 const App = (props) => {
 
@@ -21,15 +22,19 @@ const App = (props) => {
   }, [isAuth]);
 
   return (
-   <>
-    <HeaderComponent/>
-    <Route exact path='/' component={Information}/>
-    <ProtectedRoute
-      exact
-      path='/lesson'
-      component={Lesson}
-      />
-   </>
+   <div className="app-wrapper">
+     <div className="app-content">
+      <HeaderComponent/>
+      <Route exact path='/' component={Information}/>
+
+      { pages.map(item => <ProtectedRoute
+          exact={item.exact}
+          path={item.path}
+          component={item.component}/> ) }
+     </div>
+
+    <Footer/>
+   </div>
   )
  }
 

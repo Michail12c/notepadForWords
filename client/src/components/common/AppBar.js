@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
   },
+  header: {
+   backgroundColor: 'rgb(0, 119, 255)'
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -184,7 +187,7 @@ const HeaderComponent = (props) => {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.header}>
         <Toolbar>
             <Navbar/>
 

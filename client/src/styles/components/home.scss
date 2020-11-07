@@ -1,0 +1,20 @@
+@import './../variables.scss';
+
+.free-lesson {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.wrapper-slider {
+  width: 500px;
+  text-align: center;
+}
+.section-slider {
+  width: 200px !important;
+  height: 50px;
+  background-color: gray;
+}
+
+.slick-arrow {
+  background-color: black !important;
+}
