@@ -7,6 +7,9 @@ const routes = require('./server/routes');
 const passport = require('passport');
 const cors = require('cors');
 
+const List = require('./server/models/List');
+//const listDB = require('./server/db/data.json')
+
 require('dotenv').config();
 
 const PORT = process.env.PORT || 3001;
@@ -24,6 +27,9 @@ require('./server/services/passport')(passport);
 routes(app);
 
 app.use('/', express.static(path.join(__dirname, 'client', 'build')));
+
+/* new List({name: 'Base list', listWords: listDB }).save();
+console.log(listDB) */
 
 
 

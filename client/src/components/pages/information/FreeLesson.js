@@ -2,8 +2,10 @@ import React from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useDispatch, useSelector } from 'react-redux';
+import { getBaseList } from '../../../redux/actions/lesson';
 
-function SimpleSlider() {
+function SimpleSlider({listWords}) {
   let settings = {
     fade: true,
     infinite: false,
@@ -11,12 +13,12 @@ function SimpleSlider() {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  let content = [1, 2, 3, 4, 5, 6, 7];
+
   return (
     <div className="wrapper-slider">
       <Slider {...settings}>
-      {content.map(item => (
-        <div className="section-slider"><h3>{item}</h3></div>
+      {listWords && listWords.map(item => (
+        <div key={item.word} className="section-slider"><h3>{item.word}</h3></div>
       ))}
       </Slider>
     </div>
@@ -25,9 +27,20 @@ function SimpleSlider() {
 }
 
 const FreeLesson = () => {
+
+  const dispatch = useDispatch();
+  const baseList = useSelector(state => state.lessonReducer.baseList);
+  const { listWords } = baseList;
+  console.log(listWords)
+
+   if(!baseList){
+    dispatch(getBaseList());
+   }
+
+
   return (
    <div className="free-lesson">
-     <SimpleSlider/>
+     <SimpleSlider listWords={listWords}/>
    </div>
   );
 }

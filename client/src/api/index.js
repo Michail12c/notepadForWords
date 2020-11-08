@@ -24,12 +24,16 @@ export const userApi = {
   },
 
   googleRegister() {
-    console.log('hello2')
     return api.get('api/auth/google')
      .then(res => res.data)
   },
 
   getProperty(data) {
     return api.post('api/user/list', data);
+  },
+
+  getBaseList() {
+   return api.get('api/lesson/list/baseList')
+     .then(res => res.data);
   }
 };

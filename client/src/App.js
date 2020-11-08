@@ -28,6 +28,7 @@ const App = (props) => {
       <Route exact path='/' component={Information}/>
 
       { pages.map(item => <ProtectedRoute
+          key={item.path}
           exact={item.exact}
           path={item.path}
           component={item.component}/> ) }

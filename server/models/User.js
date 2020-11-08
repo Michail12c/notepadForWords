@@ -23,7 +23,7 @@ const schema = new Schema({
     {
         list: {
         type: ObjectId,
-        ref: 'Lesson',
+        ref: 'List',
         title: String
       }
     }
